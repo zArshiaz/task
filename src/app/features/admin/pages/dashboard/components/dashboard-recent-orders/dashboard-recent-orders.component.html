@@ -1,0 +1,66 @@
+<section
+  class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+  aria-labelledby="recent-orders-title"
+>
+  <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4">
+    <div>
+      <h2 id="recent-orders-title" class="font-bold text-slate-900">آخرین سفارش‌ها</h2>
+      <p class="mt-1 text-xs text-slate-500">سفارش‌های ثبت‌شده اخیر</p>
+    </div>
+    <a routerLink="/admin/orders" class="text-sm font-medium text-cyan-700 hover:text-cyan-900">
+      مشاهده همه
+    </a>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="asc" class="w-full min-w-xl text-right text-sm">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef class="px-5 py-3 text-right text-xs font-medium text-slate-500">
+          شماره سفارش
+        </th>
+        <td mat-cell *matCellDef="let order" class="whitespace-nowrap px-5 py-4 font-medium text-slate-900">
+          {{ order.id }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="customer">
+        <th mat-header-cell *matHeaderCellDef class="px-5 py-3 text-right text-xs font-medium text-slate-500">
+          مشتری
+        </th>
+        <td mat-cell *matCellDef="let order" class="whitespace-nowrap px-5 py-4 text-slate-700">
+          {{ order.customer }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef class="px-5 py-3 text-right text-xs font-medium text-slate-500">
+          تاریخ ثبت
+        </th>
+        <td mat-cell *matCellDef="let order" class="whitespace-nowrap px-5 py-4 text-slate-700">
+          {{ order.createdAt | jalaliDate: 'yyyy/MM/dd - HH:mm' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef class="px-5 py-3 text-right text-xs font-medium text-slate-500">
+          مبلغ
+        </th>
+        <td mat-cell *matCellDef="let order" class="whitespace-nowrap px-5 py-4 text-slate-700">
+          {{ order.amount }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef class="px-5 py-3 text-right text-xs font-medium text-slate-500">
+          وضعیت
+        </th>
+        <td mat-cell *matCellDef="let order" class="whitespace-nowrap px-5 py-4 text-slate-700">
+          <app-order-status-badge [status]="order.status" />
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-slate-50"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" class="hover:bg-slate-50"></tr>
+    </table>
+  </div>
+</section>

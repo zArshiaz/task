@@ -1,0 +1,18 @@
+<header class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+  <div>
+    <h1 [id]="titleId()" class="text-2xl font-bold text-slate-900 sm:text-3xl">
+      {{ title() }}
+    </h1>
+    @if (description()) {
+      <p class="mt-2 text-sm leading-6 text-slate-500">
+        {{ description() }}
+      </p>
+    }
+  </div>
+
+  @if (showDate()) {
+    <span class="w-fit rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600">
+      {{ dateLabel() }}، {{ date() | jalaliDate: dateFormat() }}
+    </span>
+  }
+</header>
