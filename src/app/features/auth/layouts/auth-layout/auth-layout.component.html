@@ -1,0 +1,24 @@
+<main class="min-h-dvh bg-slate-100 p-4 sm:p-8" dir="rtl">
+  <section
+    class="mx-auto grid min-h-[calc(100dvh-2rem)] max-w-6xl overflow-hidden rounded-3xl bg-white shadow-xl sm:min-h-[calc(100dvh-6rem)] md:grid-cols-2"
+  >
+    <div class="hidden bg-slate-900 p-12 text-white md:flex md:flex-col md:justify-between">
+      <div class="flex items-center gap-3">
+        <span class="grid size-10 place-items-center rounded-xl bg-cyan-400 text-slate-900">
+          <mat-icon aria-hidden="true">storefront</mat-icon>
+        </span>
+        <span class="text-xl font-bold">فروشگاه من</span>
+      </div>
+      <div>
+        <p class="mb-4 text-sm font-medium text-cyan-300">پنل مدیریت فروشگاه</p>
+        <h1 class="text-4xl font-bold leading-relaxed">مدیریت ساده‌تر،<br />فروش بهتر.</h1>
+        <p class="mt-5 max-w-sm leading-8 text-slate-300">
+          از اینجا محصولات، سفارش‌ها و اطلاعات فروشگاه خود را مدیریت کنید.
+        </p>
+      </div>
+    </div>
+    <div class="flex items-center justify-center p-6 sm:p-12">
+      <router-outlet />
+    </div>
+  </section>
+</main>

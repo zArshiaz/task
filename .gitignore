@@ -29,6 +29,15 @@ yarn-error.log
 !.vscode/mcp.json
 .history/*
 
+# AI assistants
+/.agents/
+/.codex/
+/.cursor/
+/AGENTS.md
+/.cursorrules
+/.cursorignore
+/.cursorindexingignore
+
 # Miscellaneous
 /.angular/cache
 .sass-cache/
