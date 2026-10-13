@@ -22,23 +22,17 @@
 
 
 
-  --color-brand-primary: #5c4dff;
-  --color-brand-secondary: #8d48f0;
-  --color-brand-accent: #d044d7;
-  --color-brand-pink: #fc60cd;
-  --color-brand-purple: #ab48ec;
-  --color-brand-indigo: #5131e9;
   --background-image-login-button: linear-gradient(
     105deg,
-    var(--color-brand-primary) 0%,
-    var(--color-brand-secondary) 49%,
-    var(--color-brand-accent) 100%
+    var(--color-cyan-700) 0%,
+    var(--color-cyan-500) 49%,
+    var(--color-sky-400) 100%
   );
   --background-image-brand-logo: linear-gradient(
     120deg,
-    var(--color-brand-pink) 12%,
-    var(--color-brand-purple) 48%,
-    var(--color-brand-indigo) 88%
+    var(--color-cyan-500) 12%,
+    var(--color-sky-500) 48%,
+    var(--color-blue-700) 88%
   );
 }
 
