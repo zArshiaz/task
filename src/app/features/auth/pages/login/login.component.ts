@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, signal, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,8 +7,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -19,20 +19,24 @@ import { AuthStore } from '../../../../core/auth/auth.store';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { FormControlErrorComponent } from '../../../../shared/components/form-control-error/form-control-error.component';
 import { LoadingButtonDirective } from '../../../../shared/directives/loading-button/loading-button.directive';
+import { MatIconButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
   imports: [
     ReactiveFormsModule,
-    MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatSnackBarModule,
     AlertComponent,
     FormControlErrorComponent,
     LoadingButtonDirective,
+    MatIconButton,
   ],
   templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
   private readonly authService = inject(AuthService);
@@ -44,11 +48,17 @@ export class LoginComponent {
   private formDirective!: FormGroupDirective;
 
   protected readonly isSubmitting = signal(false);
+  protected readonly isPasswordVisible = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly loginForm = new FormGroup({
     username: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     password: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    rememberMe: new FormControl(true, { nonNullable: true }),
   });
+
+  protected togglePasswordVisibility(): void {
+    this.isPasswordVisible.update((isVisible) => !isVisible);
+  }
 
   protected submit(): void {
     if (this.loginForm.invalid || this.isSubmitting()) {
@@ -58,7 +68,8 @@ export class LoginComponent {
 
     this.isSubmitting.set(true);
     this.errorMessage.set(null);
-    const credentials = this.loginForm.getRawValue();
+    const { username, password } = this.loginForm.getRawValue();
+    const credentials = { username, password };
 
     this.authService
       .login(credentials)

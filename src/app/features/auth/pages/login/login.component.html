@@ -1,44 +1,58 @@
-<div class="w-full max-w-md">
-  <div class="mb-10 md:hidden">
-    <p class="text-sm font-medium text-cyan-700">پنل مدیریت فروشگاه</p>
-    <h1 class="mt-2 text-2xl font-bold text-slate-900">فروشگاه من</h1>
-  </div>
-
-  <div class="mb-8">
-    <h2 class="text-3xl font-bold text-slate-900">خوش آمدید</h2>
-    <p class="mt-3 leading-7 text-slate-500">
-      برای ورود به پنل مدیریت، اطلاعات حساب خود را وارد کنید.
-    </p>
-  </div>
+<div class="mx-auto w-full max-w-100">
+  <header class="mb-6 flex flex-col items-center justify-center md:mb-8">
+    <span class="mx-auto text-transparent" aria-hidden="true">
+      <mat-icon class="brand-icon bg-brand-logo bg-clip-text ">checkroom</mat-icon>
+    </span>
+    <h2 class=" text-3xl font-black tracking-tight text-violet-950">
+      بوتیک شیک پوش
+    </h2>
+    <p class="mt-1.5 text-sm text-slate-500">ورود به پنل مدیریت فروشگاه لباس</p>
+  </header>
 
   @if (errorMessage(); as message) {
     <app-alert class="mb-5 block" variant="error" [message]="message" />
   }
 
-  <form [formGroup]="loginForm" (ngSubmit)="submit()" class="flex flex-col gap-2">
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>نام کاربری</mat-label>
+  <form [formGroup]="loginForm" (ngSubmit)="submit()" class="flex flex-col gap-1">
+    <mat-form-field appearance="outline" hideRequiredMarker class="w-full">
+      <mat-label>ایمیل</mat-label>
+        <mat-icon matPrefix aria-hidden="true">mail_outline</mat-icon>
+
       <input matInput formControlName="username" autocomplete="username" />
       <mat-error appFormControlError [control]="loginForm.controls.username" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-full">
+    <mat-form-field appearance="outline" hideRequiredMarker class="w-full">
       <mat-label>رمز عبور</mat-label>
-      <input matInput type="password" formControlName="password" autocomplete="current-password" />
+      <mat-icon matPrefix aria-hidden="true">lock_outline</mat-icon>
+      <input
+        matInput
+        [type]="isPasswordVisible() ? 'text' : 'password'"
+        formControlName="password"
+        autocomplete="current-password"
+      />
+      <button
+        mat-icon-button
+        matIconSuffix
+        type="button"
+        [attr.aria-label]="
+      isPasswordVisible() ? 'مخفی کردن رمز عبور' : 'نمایش رمز عبور'
+    "
+        [attr.aria-pressed]="isPasswordVisible()"
+        (click)="togglePasswordVisibility()"
+      >
+        <mat-icon class="!text-gray-500">
+          {{ isPasswordVisible() ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </button>
+
       <mat-error appFormControlError [control]="loginForm.controls.password" />
     </mat-form-field>
 
     <button
-      mat-flat-button
       type="submit"
-      class="!mt-4 !h-12 !rounded-xl"
+      class="mt-2 flex items-center justify-center h-12 w-full text-lg sm:text-xl font-bold  rounded-lg bg-login-button  text-white shadow-xl shadow-violet-500/30 !pointer-coarse"
       [appLoadingButton]="isSubmitting()"
-    >
-      ورود به پنل
-    </button>
+    >ورود</button>
   </form>
-
-  <p class="mt-8 text-center text-xs leading-6 text-slate-400">
-    اطلاعات ورود شما به‌صورت امن پردازش می‌شود.
-  </p>
 </div>

@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+.auth-visual {
+  background:
+    radial-gradient(
+      circle at 18% 68%,
+      color-mix(in srgb, var(--color-fuchsia-300) 48%, transparent),
+      transparent 32%
+    ),
+    linear-gradient(
+      145deg,
+      var(--color-fuchsia-500) 0%,
+      var(--color-violet-600) 38%,
+      var(--color-indigo-700) 100%
+    );
+}
+
+.auth-visual::before,
+.auth-visual::after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  background: color-mix(in srgb, var(--color-white) 13%, transparent);
+  border-radius: 44% 56% 55% 45% / 46% 37% 63% 54%;
+}
+
+.auth-visual::before {
+  inset: -19% 42% 43% -18%;
+  transform: rotate(27deg);
+}
+
+.auth-visual::after {
+  inset: 58% -14% -44% 23%;
+  transform: rotate(-18deg);
+}

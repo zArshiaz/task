@@ -1,0 +1,102 @@
+<aside
+  class="flex h-full min-h-0 flex-col bg-slate-900 py-5 pt-2 text-white transition-[width] duration-300 relative"
+  [class.w-72]="!mobile() && !isCollapsed()"
+  [class.w-20]="isCollapsed()"
+  [class.px-4]="mobile()"
+  [class.px-3]="!mobile()"
+  [class.shadow-xl]="!mobile()"
+>
+  <div
+    class="flex min-h-12 items-center"
+    [class.justify-between]="mobile()"
+    [class.justify-center]="isCollapsed()"
+  >
+    <a
+      routerLink="/admin/dashboard"
+      class="flex min-w-0 items-center gap-3 overflow-hidden px-2"
+      [attr.aria-label]="isCollapsed() ? 'فروشگاه من' : null"
+      (click)="handleNavigation()"
+    >
+      <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-cyan-400 text-slate-950">
+        <mat-icon aria-hidden="true">storefront</mat-icon>
+      </span>
+
+      @if (!isCollapsed()) {
+        <span class="whitespace-nowrap">
+          <span class="block font-bold" [class.text-lg]="!mobile()">فروشگاه من</span>
+          @if (mobile()) {
+            <span class="mt-1 block text-xs text-slate-400">پنل مدیریت</span>
+          }
+        </span>
+      }
+    </a>
+
+    @if (mobile()) {
+      <button mat-icon-button type="button" aria-label="بستن منو" (click)="closeRequested.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </div>
+
+  <nav
+    class="mt-8 flex flex-1 flex-col gap-2 overflow-y-auto"
+    [class.px-1]="!mobile()"
+    aria-label="مسیرهای پنل مدیریت"
+  >
+    @for (item of navigationItems(); track item.path) {
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="bg-cyan-400 text-slate-950"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex min-h-12 items-center rounded-xl text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+        [class.gap-3]="!isCollapsed()"
+        [class.justify-center]="isCollapsed()"
+        [class.px-4]="!isCollapsed()"
+        [attr.aria-label]="isCollapsed() ? item.label : null"
+        [attr.title]="isCollapsed() ? item.label : null"
+        (click)="handleNavigation()"
+      >
+        <mat-icon class="shrink-0" aria-hidden="true">{{ item.icon }}</mat-icon>
+        @if (!isCollapsed()) {
+          <span class="whitespace-nowrap">{{ item.label }}</span>
+        }
+      </a>
+    }
+  </nav>
+  <button type="button"
+          class="flex justify-center items-center size-10 rounded-full absolute top-1/2 left-0
+         -translate-x-1/2 -translate-y-1/2 transition-transform duration-200 ease-out
+         hover:scale-110 active:scale-95
+         bg-cyan-400 text-slate-950
+         shadow-lg z-10"
+  (click)="toggleSidebar()"
+  [attr.aria-expanded]="!isCollapsed()"
+  [attr.aria-label]="isCollapsed() ? 'باز کردن منو' : 'جمع کردن منو'"
+>
+  <mat-icon>
+    {{ isCollapsed() ? 'keyboard_double_arrow_left' : 'keyboard_double_arrow_right' }}
+  </mat-icon>
+</button>
+
+  <div class="flex flex-col items-center border-t border-slate-800 pt-4">
+    @if (isCollapsed()) {
+      <button
+        mat-icon-button
+        type="button"
+        class="mx-auto block"
+        aria-label="خروج از حساب"
+        title="خروج از حساب"
+        (click)="logoutRequested.emit()"
+      >
+        <mat-icon>logout</mat-icon>
+      </button>
+    } @else {
+      <button mat-button type="button" class="w-full" (click)="logoutRequested.emit()">
+        <span class="inline-flex items-center justify-center gap-2">
+          <mat-icon>logout</mat-icon>
+          <span>{{ mobile() ? 'خروج از حساب' : 'خروج' }}</span>
+        </span>
+      </button>
+    }
+  </div>
+</aside>

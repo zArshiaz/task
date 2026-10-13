@@ -1,14 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
 @import '@angular/material/prebuilt-themes/azure-blue.css';
 
+@font-face {
+  font-family: 'BYekan';
+  src: url('/fonts/yekan/BYekan.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BYekan';
+  src: url('/fonts/yekan/BYekanBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@theme {
+  --font-yekan: 'BYekan', sans-serif;
+
+
+
+
+  --color-brand-primary: #5c4dff;
+  --color-brand-secondary: #8d48f0;
+  --color-brand-accent: #d044d7;
+  --color-brand-pink: #fc60cd;
+  --color-brand-purple: #ab48ec;
+  --color-brand-indigo: #5131e9;
+  --background-image-login-button: linear-gradient(
+    105deg,
+    var(--color-brand-primary) 0%,
+    var(--color-brand-secondary) 49%,
+    var(--color-brand-accent) 100%
+  );
+  --background-image-brand-logo: linear-gradient(
+    120deg,
+    var(--color-brand-pink) 12%,
+    var(--color-brand-purple) 48%,
+    var(--color-brand-indigo) 88%
+  );
+}
+
+@layer components {
+  .mat-icon.brand-icon {
+    @apply !size-auto !text-8xl !leading-none;
+  }
+
+}
+
 html {
-  font-family: Tahoma, Arial, sans-serif;
-  background: #f1f5f9;
+  font-family: BYekan, Arial, sans-serif;
+  background: var(--color-slate-100);
+
 }
 
 body {
   margin: 0;
   min-width: 320px;
+}
+
+button {
+  cursor: pointer;
 }

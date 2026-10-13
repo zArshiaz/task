@@ -1,23 +1,34 @@
-<main class="min-h-dvh bg-slate-100 p-4 sm:p-8" dir="rtl">
+<main
+  class="h-dvh overflow-hidden md:grid md:place-items-center md:p-8"
+  dir="rtl"
+>
   <section
-    class="mx-auto grid min-h-[calc(100dvh-2rem)] max-w-6xl overflow-hidden rounded-3xl bg-white shadow-xl sm:min-h-[calc(100dvh-6rem)] md:grid-cols-2"
+    class="grid h-dvh w-full grid-rows-[minmax(0,1fr)_auto] overflow-hidden
+         md:h-auto md:max-w-6xl md:grid-cols-2 md:grid-rows-1
+         lg:aspect-video md:rounded-2xl md:bg-white/90
+         md:shadow-2xl md:shadow-violet-950/30"
+    aria-label="ورود به پنل مدیریت فروشگاه"
   >
-    <div class="hidden bg-slate-900 p-12 text-white md:flex md:flex-col md:justify-between">
-      <div class="flex items-center gap-3">
-        <span class="grid size-10 place-items-center rounded-xl bg-cyan-400 text-slate-900">
-          <mat-icon aria-hidden="true">storefront</mat-icon>
-        </span>
-        <span class="text-xl font-bold">فروشگاه من</span>
-      </div>
-      <div>
-        <p class="mb-4 text-sm font-medium text-cyan-300">پنل مدیریت فروشگاه</p>
-        <h1 class="text-4xl font-bold leading-relaxed">مدیریت ساده‌تر،<br />فروش بهتر.</h1>
-        <p class="mt-5 max-w-sm leading-8 text-slate-300">
-          از اینجا محصولات، سفارش‌ها و اطلاعات فروشگاه خود را مدیریت کنید.
+    <div class="auth-visual relative isolate min-h-0 overflow-hidden">
+      <div class="relative z-20 hidden px-8 pt-20 md:pt-24 text-center text-white md:block">
+        <h1 class="m-0 text-2xl font-extrabold lg:text-3xl">
+          مدیریت هوشمند فروشگاه لباس
+        </h1>
+        <p class="mt-3 text-sm text-white/80 md:text-base lg:text-lg">
+          سفارش‌ها، محصولات و موجودی را یکجا کنترل کنید
         </p>
       </div>
+
+      <img
+        class="absolute bottom-0 left-1/2 z-10 h-auto w-full max-w-none -translate-x-1/2 object-contain"
+        src="/images/auth/fashion-dashboard-hero.png"
+        alt="تصویرسازی پنل مدیریت فروشگاه پوشاک"
+        width="1536"
+        height="1024"
+      />
     </div>
-    <div class="flex items-center justify-center p-6 sm:p-12">
+
+    <div class="relative z-30 -mt-7 flex min-h-0 items-start justify-center overflow-y-auto rounded-t-3xl bg-slate-50 px-6 py-8 shadow-xl shadow-violet-900/10 md:m-0 md:items-center md:rounded-none md:bg-white/90 md:px-12 md:py-10 md:shadow-none">
       <router-outlet />
     </div>
   </section>
