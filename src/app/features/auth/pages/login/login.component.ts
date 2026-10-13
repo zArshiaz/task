@@ -1,10 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, signal, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 
 import { AuthService } from '../../../../core/auth/auth.service';
@@ -30,6 +37,7 @@ import { LoadingButtonDirective } from '../../../../shared/directives/loading-bu
 export class LoginComponent {
   private readonly authService = inject(AuthService);
   private readonly authStore = inject(AuthStore);
+  private readonly router = inject(Router);
   private readonly snackBar = inject(MatSnackBar);
 
   @ViewChild(FormGroupDirective)
@@ -59,8 +67,8 @@ export class LoginComponent {
         next: (session) => {
           this.authStore.login(session.token, credentials.username);
           this.snackBar.open('ورود با موفقیت انجام شد.', 'بستن');
-          this.loginForm.reset();
           this.formDirective.resetForm();
+          void this.router.navigate(['/admin/dashboard']);
         },
         error: (error: HttpErrorResponse) => {
           this.errorMessage.set(

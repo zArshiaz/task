@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.admin-shell,
+.admin-content {
+  height: 100%;
+}
+
+.admin-content {
+  overflow: hidden;
+}
+
+.mobile-sidebar {
+  width: min(18rem, calc(100vw - 3rem));
+  border-radius: 0;
+}
