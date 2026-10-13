@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { finalize } from 'rxjs';
 
 import { AuthService } from '../../../../core/auth/auth.service';
+import { AuthStore } from '../../../../core/auth/auth.store';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { FormControlErrorComponent } from '../../../../shared/components/form-control-error/form-control-error.component';
 import { LoadingButtonDirective } from '../../../../shared/directives/loading-button/loading-button.directive';
@@ -28,6 +29,7 @@ import { LoadingButtonDirective } from '../../../../shared/directives/loading-bu
 })
 export class LoginComponent {
   private readonly authService = inject(AuthService);
+  private readonly authStore = inject(AuthStore);
   private readonly snackBar = inject(MatSnackBar);
 
   @ViewChild(FormGroupDirective)
@@ -48,13 +50,14 @@ export class LoginComponent {
 
     this.isSubmitting.set(true);
     this.errorMessage.set(null);
+    const credentials = this.loginForm.getRawValue();
 
     this.authService
-      .login(this.loginForm.getRawValue())
+      .login(credentials)
       .pipe(finalize(() => this.isSubmitting.set(false)))
       .subscribe({
         next: (session) => {
-          this.authService.saveSession(session);
+          this.authStore.login(session.token, credentials.username);
           this.snackBar.open('ورود با موفقیت انجام شد.', 'بستن');
           this.loginForm.reset();
           this.formDirective.resetForm();
