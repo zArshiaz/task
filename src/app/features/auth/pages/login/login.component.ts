@@ -79,7 +79,7 @@ export class LoginComponent {
           this.authStore.login(session.token, credentials.username);
           this.snackBar.open('ورود با موفقیت انجام شد.', 'بستن');
           this.formDirective.resetForm();
-          void this.router.navigate(['/admin/dashboard']);
+          void this.router.navigate(['/admin']);
         },
         error: (error: HttpErrorResponse) => {
           this.errorMessage.set(
