@@ -19,8 +19,11 @@
     <p class="mt-0.5 hidden text-xs text-slate-500 sm:block">مدیریت سریع و یکپارچه کسب‌وکار</p>
   </div>
 
-  <div class="flex items-center gap-2 text-gray-600">
-    <p>{{username()}}</p>
+  <div class="flex items-center gap-2 ">
+    <div>
+      <p>نام کاربری</p>
+      <p class="text-xs leading-1.5 mb-1.5">{{username()}}</p>
+    </div>
     <span
       class="flex items-center justify-center size-9 rounded-full bg-slate-900 text-sm font-bold text-cyan-300"
       [attr.aria-label]="username() ? 'کاربر ' + username() : 'کاربر پنل مدیریت'"

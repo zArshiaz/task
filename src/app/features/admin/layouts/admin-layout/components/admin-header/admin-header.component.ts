@@ -14,5 +14,5 @@ export class AdminHeaderComponent {
 
   readonly mobileMenuRequested = output<void>();
 
-  protected readonly usernameInitial = computed(() => this.username()?.trim().charAt(0) || 'م');
+  protected readonly usernameInitial = computed(() => this.username()?.trim().charAt(0));
 }

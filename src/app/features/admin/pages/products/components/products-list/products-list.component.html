@@ -1,0 +1,80 @@
+<section
+  class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+  aria-label="فهرست محصولات"
+>
+  <div
+    [formGroup]="filterForm"
+    class="grid gap-3 border-b border-slate-100 bg-slate-50/70 p-4 md:grid-cols-2"
+  >
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full md:col-span-2">
+      <mat-label>جست‌وجوی محصول یا دسته‌بندی</mat-label>
+      <mat-icon matPrefix aria-hidden="true">search</mat-icon>
+      <input matInput type="search" autocomplete="off" formControlName="search" />
+      @if (filterForm.controls.search.value) {
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          aria-label="پاک کردن جست‌وجو"
+          (click)="clearSearch()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full">
+      <mat-label>دسته‌بندی</mat-label>
+      <mat-icon matPrefix aria-hidden="true">folder_open</mat-icon>
+      <mat-select formControlName="category">
+        <mat-option value="">همه دسته‌ها</mat-option>
+        @for (category of categories(); track category) {
+          <mat-option [value]="category">{{ category }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full">
+      <mat-label>مرتب‌سازی</mat-label>
+      <mat-icon matPrefix aria-hidden="true">sort</mat-icon>
+      <mat-select formControlName="sort">
+        <mat-option value="id-desc">جدیدترین</mat-option>
+        <mat-option value="id-asc">قدیمی‌ترین</mat-option>
+        <mat-option value="price-asc">کمترین قیمت</mat-option>
+        <mat-option value="price-desc">بیشترین قیمت</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  @if (visibleProducts().length > 0) {
+    <ul class="grid list-none gap-4 p-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      @for (product of visibleProducts(); track product.id) {
+        <li class="h-full">
+          <app-product-card
+            class="block h-full"
+            [product]="product"
+            [deleting]="deletingProductId() === product.id"
+            (detailsRequested)="detailsRequested.emit($event)"
+            (editRequested)="editRequested.emit($event)"
+            (deleteRequested)="deleteRequested.emit($event)"
+          />
+        </li>
+      }
+    </ul>
+
+    <mat-paginator
+      [length]="filteredProducts().length"
+      [pageIndex]="currentPageIndex()"
+      [pageSize]="pageSize()"
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      (page)="changePage($event)"
+    />
+  } @else {
+    <p
+      class="m-4 rounded-xl border border-dashed border-slate-200 px-4 py-12 text-center text-sm text-slate-500"
+    >
+      محصولی مطابق جست‌وجو یا دسته‌بندی انتخاب‌شده پیدا نشد.
+    </p>
+  }
+</section>

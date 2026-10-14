@@ -12,7 +12,7 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { DeleteProductDialogComponent } from './components/delete-product-dialog/delete-product-dialog.component';
 import { ProductDetailsDialogComponent } from './components/product-details-dialog/product-details-dialog.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
-import { ProductsTableComponent } from './components/products-table/products-table.component';
+import { ProductsListComponent } from './components/products-list/products-list.component';
 import { ProductsService } from './data-access/products.service';
 import { Product } from './models/product.model';
 
@@ -25,7 +25,7 @@ import { Product } from './models/product.model';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     PageHeaderComponent,
-    ProductsTableComponent,
+    ProductsListComponent,
   ],
   templateUrl: './products.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
