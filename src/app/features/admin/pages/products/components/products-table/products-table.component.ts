@@ -1,20 +1,19 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   effect,
   input,
   output,
-  ViewChild,
+  viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 import { Product } from '../../models/product.model';
+import { LoadingButtonDirective } from '../../../../../../shared/directives/loading-button/loading-button.directive';
 
 class PersianPaginatorIntl extends MatPaginatorIntl {
   override itemsPerPageLabel = 'تعداد در هر صفحه:';
@@ -40,7 +39,7 @@ class PersianPaginatorIntl extends MatPaginatorIntl {
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule,
+    LoadingButtonDirective,
     MatSortModule,
     MatTableModule,
   ],
@@ -48,15 +47,15 @@ class PersianPaginatorIntl extends MatPaginatorIntl {
   templateUrl: './products-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsTableComponent implements AfterViewInit {
+export class ProductsTableComponent {
   readonly products = input.required<readonly Product[]>();
-  readonly loading = input(false);
   readonly deletingProductId = input<number | null>(null);
 
   readonly editRequested = output<Product>();
   readonly deleteRequested = output<Product>();
   protected readonly dataSource = new MatTableDataSource<Product>();
   protected readonly displayedColumns: readonly string[] = [
+    'id',
     'image',
     'title',
     'category',
@@ -64,28 +63,16 @@ export class ProductsTableComponent implements AfterViewInit {
     'actions',
   ];
 
-  @ViewChild(MatPaginator)
-  private paginator!: MatPaginator;
-
-  @ViewChild(MatSort)
-  private sort!: MatSort;
+  private readonly paginator = viewChild(MatPaginator);
+  private readonly sort = viewChild(MatSort);
 
   constructor() {
-    this.dataSource.sortingDataAccessor = (product, property) => {
-      if (property === 'price') {
-        return product.price;
-      }
-
-      return product[property as keyof Product] ?? '';
-    };
-
     effect(() => {
       this.dataSource.data = [...this.products()];
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    effect(() => {
+      this.dataSource.paginator = this.paginator();
+      this.dataSource.sort = this.sort();
+    });
   }
 }

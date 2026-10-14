@@ -2,17 +2,10 @@
   <app-page-header
     title="محصولات"
     description="محصولات فروشگاه را مشاهده، ویرایش یا حذف کنید."
-    titleId="products-title">
-    <button
-      page-header-actions
-      mat-flat-button
-      type="button"
-      (click)="openCreateForm()"
-    >
-      <span class="inline-flex items-center gap-2">
-        <mat-icon aria-hidden="true">add</mat-icon>
-        افزودن محصول
-      </span>
+    titleId="products-title"
+  >
+    <button page-header-actions mat-flat-button type="button" (click)="openCreateForm()">
+      افزودن محصول
     </button>
   </app-page-header>
 
@@ -23,13 +16,24 @@
     </div>
   }
 
-  <div class="mt-5">
-    <app-products-table
-      [products]="products()"
-      [loading]="isLoading()"
-      [deletingProductId]="deletingProductId()"
-      (editRequested)="openEditForm($event)"
-      (deleteRequested)="confirmDelete($event)"
-    />
-  </div>
+  @if (isLoading()) {
+    <div
+      class="mt-5 grid min-h-80 place-items-center"
+      role="status"
+      aria-label="در حال دریافت محصولات"
+    >
+      <mat-spinner diameter="40" />
+    </div>
+  } @else if (!errorMessage() && products().length === 0) {
+    <app-alert class="mt-5 block" variant="info" message="محصولی برای نمایش وجود ندارد." />
+  } @else if (!errorMessage()) {
+    <div class="mt-5">
+      <app-products-table
+        [products]="products()"
+        [deletingProductId]="deletingProductId()"
+        (editRequested)="openEditForm($event)"
+        (deleteRequested)="confirmDelete($event)"
+      />
+    </div>
+  }
 </section>

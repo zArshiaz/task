@@ -3,6 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { filter, finalize, switchMap } from 'rxjs';
 
@@ -20,6 +21,7 @@ import { Product } from './models/product.model';
     AlertComponent,
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatSnackBarModule,
     PageHeaderComponent,
     ProductsTableComponent,
@@ -52,15 +54,19 @@ export class ProductsComponent {
 
   protected confirmDelete(product: Product): void {
     this.dialog
-      .open(DeleteProductDialogComponent, { data: product, width: '24rem', maxWidth: 'calc(100vw - 2rem)' })
+      .open(DeleteProductDialogComponent, {
+        data: product,
+        width: '24rem',
+        maxWidth: 'calc(100vw - 2rem)',
+      })
       .afterClosed()
       .pipe(
         filter((confirmed): confirmed is true => confirmed === true),
         switchMap(() => {
           this.deletingProductId.set(product.id);
-          return this.productsService.delete(product.id).pipe(
-            finalize(() => this.deletingProductId.set(null)),
-          );
+          return this.productsService
+            .delete(product.id)
+            .pipe(finalize(() => this.deletingProductId.set(null)));
         }),
         takeUntilDestroyed(this.destroyRef),
       )

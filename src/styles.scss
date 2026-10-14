@@ -1,7 +1,5 @@
 @use '@angular/material' as mat;
 
-@import 'tailwindcss';
-
 $app-theme: mat.define-theme((
   color: (
     theme-type: light,
@@ -51,25 +49,6 @@ html {
 // Use this semantic variant for destructive Material buttons.
 .app-button-error {
   @include mat.button-color($app-theme, error);
-}
-
-@theme {
-  --font-yekan: 'BYekan', sans-serif;
-  --color-brand-primary: #06b6d4;
-  --color-brand-on-primary: #0f172a;
-
-  --background-image-login-button: linear-gradient(
-    105deg,
-    var(--color-cyan-700) 0%,
-    var(--color-cyan-500) 49%,
-    var(--color-sky-400) 100%
-  );
-  --background-image-brand-logo: linear-gradient(
-    120deg,
-    var(--color-cyan-500) 12%,
-    var(--color-sky-500) 48%,
-    var(--color-blue-700) 88%
-  );
 }
 
 @layer components {

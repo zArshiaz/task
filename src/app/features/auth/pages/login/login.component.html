@@ -1,11 +1,9 @@
 <div class="mx-auto w-full max-w-100">
   <header class="mb-6 flex flex-col items-center justify-center md:mb-8">
     <span class="mx-auto text-transparent" aria-hidden="true">
-      <mat-icon class="brand-icon bg-brand-logo bg-clip-text ">checkroom</mat-icon>
+      <mat-icon class="brand-icon bg-brand-logo bg-clip-text">checkroom</mat-icon>
     </span>
-    <h2 class="text-3xl font-black tracking-tight text-slate-900">
-      بوتیک شیک پوش
-    </h2>
+    <h2 class="text-3xl font-black tracking-tight text-slate-900">بوتیک شیک پوش</h2>
     <p class="mt-1.5 text-sm text-slate-500">ورود به پنل مدیریت فروشگاه لباس</p>
   </header>
 
@@ -16,7 +14,7 @@
   <form [formGroup]="loginForm" (ngSubmit)="submit()" class="flex flex-col gap-1">
     <mat-form-field appearance="outline" hideRequiredMarker class="w-full">
       <mat-label>ایمیل</mat-label>
-        <mat-icon matPrefix aria-hidden="true">mail_outline</mat-icon>
+      <mat-icon matPrefix aria-hidden="true">mail_outline</mat-icon>
 
       <input matInput formControlName="username" autocomplete="username" />
       <mat-error appFormControlError [control]="loginForm.controls.username" />
@@ -35,9 +33,7 @@
         mat-icon-button
         matIconSuffix
         type="button"
-        [attr.aria-label]="
-      isPasswordVisible() ? 'مخفی کردن رمز عبور' : 'نمایش رمز عبور'
-    "
+        [attr.aria-label]="isPasswordVisible() ? 'مخفی کردن رمز عبور' : 'نمایش رمز عبور'"
         [attr.aria-pressed]="isPasswordVisible()"
         (click)="togglePasswordVisibility()"
       >
@@ -51,8 +47,11 @@
 
     <button
       type="submit"
-      class="mt-2 flex h-12 w-full items-center justify-center rounded-lg bg-login-button text-lg font-bold text-white shadow-xl shadow-cyan-500/30 sm:text-xl"
+      class="mt-2 flex h-12 w-full items-center justify-center rounded-lg bg-login-button text-lg font-bold text-white shadow-xl shadow-cyan-500/30 disabled:!cursor-not-allowed disabled:bg-login-button-disabled disabled:text-slate-500 disabled:shadow-none sm:text-xl"
+      [disabled]="loginForm.invalid || isSubmitting()"
       [appLoadingButton]="isSubmitting()"
-    >ورود</button>
+    >
+      ورود
+    </button>
   </form>
 </div>
