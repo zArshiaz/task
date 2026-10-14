@@ -1,4 +1,4 @@
-<header class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+<header class="flex gap-3 justify-between it">
   <div>
     <h1 [id]="titleId()" class="text-2xl font-bold text-slate-900 sm:text-3xl">
       {{ title() }}
@@ -10,9 +10,13 @@
     }
   </div>
 
-  @if (showDate()) {
-    <span class="w-fit rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600">
-      {{ dateLabel() }}، {{ date() | jalaliDate: dateFormat() }}
-    </span>
-  }
+  <div class="flex flex-wrap items-center gap-3">
+    <ng-content select="[page-header-actions]" />
+
+    @if (showDate()) {
+      <span class="w-fit rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600">
+        {{ dateLabel() }}، {{ date() | jalaliDate: dateFormat() }}
+      </span>
+    }
+  </div>
 </header>

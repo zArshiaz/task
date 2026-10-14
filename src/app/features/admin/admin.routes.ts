@@ -17,14 +17,7 @@ export const ADMIN_ROUTES: Routes = [
       {
         path: 'products',
         loadComponent: () =>
-          import('./pages/placeholder/admin-placeholder.component').then(
-            (m) => m.AdminPlaceholderComponent,
-          ),
-        data: {
-          title: 'محصولات',
-          description: 'مدیریت محصولات و موجودی فروشگاه از این بخش انجام می‌شود.',
-          icon: 'inventory_2',
-        },
+          import('./pages/products/products.component').then((m) => m.ProductsComponent),
       },
       {
         path: 'orders',
