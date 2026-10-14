@@ -17,7 +17,7 @@
       [attr.aria-label]="isCollapsed() ? 'فروشگاه من' : null"
       (click)="handleNavigation()"
     >
-      <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-cyan-400 text-slate-950">
+      <span class="app-primary-surface grid size-10 shrink-0 place-items-center rounded-xl">
         <mat-icon aria-hidden="true">storefront</mat-icon>
       </span>
 
@@ -46,7 +46,7 @@
     @for (item of navigationItems(); track item.path) {
       <a
         [routerLink]="item.path"
-        routerLinkActive="bg-cyan-400 text-slate-950"
+        routerLinkActive="app-primary-surface"
         [routerLinkActiveOptions]="{ exact: true }"
         class="flex min-h-12 items-center rounded-xl text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
         [class.gap-3]="!isCollapsed()"
@@ -67,7 +67,7 @@
           class="flex justify-center items-center size-10 rounded-full absolute top-1/2 left-0
          -translate-x-1/2 -translate-y-1/2 transition-transform duration-200 ease-out
          hover:scale-110 active:scale-95
-         bg-cyan-400 text-slate-950
+         app-primary-surface
          shadow-lg z-10"
   (click)="toggleSidebar()"
   [attr.aria-expanded]="!isCollapsed()"

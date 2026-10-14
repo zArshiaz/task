@@ -7,6 +7,7 @@ $app-theme: mat.define-theme((
     theme-type: light,
     primary: mat.$cyan-palette,
     tertiary: mat.$azure-palette,
+    use-system-variables: true,
   ),
   typography: (
     plain-family: (BYekan, Arial, sans-serif),
@@ -33,6 +34,18 @@ $app-theme: mat.define-theme((
 
 html {
   @include mat.all-component-themes($app-theme);
+  @include mat.system-level-colors($app-theme);
+  @include mat.theme-overrides((
+    primary: var(--color-brand-primary),
+    on-primary: var(--color-brand-on-primary),
+    primary-container: #cffafe,
+    on-primary-container: #164e63,
+    inverse-primary: #67e8f9,
+    primary-fixed: #cffafe,
+    primary-fixed-dim: #67e8f9,
+    on-primary-fixed: #083344,
+    on-primary-fixed-variant: #155e75,
+  ));
 }
 
 // Use this semantic variant for destructive Material buttons.
@@ -42,6 +55,8 @@ html {
 
 @theme {
   --font-yekan: 'BYekan', sans-serif;
+  --color-brand-primary: #06b6d4;
+  --color-brand-on-primary: #0f172a;
 
   --background-image-login-button: linear-gradient(
     105deg,
@@ -58,6 +73,11 @@ html {
 }
 
 @layer components {
+  .app-primary-surface {
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+  }
+
   .mat-icon.brand-icon {
     width: auto !important;
     height: auto !important;
