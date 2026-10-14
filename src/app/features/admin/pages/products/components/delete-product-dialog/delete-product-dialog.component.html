@@ -1,0 +1,10 @@
+<h2 mat-dialog-title class="text-xl font-bold text-slate-900">حذف محصول</h2>
+
+<mat-dialog-content class="!text-slate-600">
+  آیا از حذف «{{ product.title }}» مطمئن هستید؟ این عملیات قابل بازگشت نیست.
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="!gap-2 !px-6 !pb-5">
+  <button mat-button type="button" (click)="dialogRef.close(false)">انصراف</button>
+  <button mat-flat-button type="button" class="app-button-error" (click)="dialogRef.close(true)">حذف محصول</button>
+</mat-dialog-actions>

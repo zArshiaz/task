@@ -1,6 +1,21 @@
+@use '@angular/material' as mat;
 
 @import 'tailwindcss';
-@import '@angular/material/prebuilt-themes/azure-blue.css';
+
+$app-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$cyan-palette,
+    tertiary: mat.$azure-palette,
+  ),
+  typography: (
+    plain-family: (BYekan, Arial, sans-serif),
+    brand-family: (BYekan, Arial, sans-serif),
+  ),
+  density: (
+    scale: 0,
+  ),
+));
 
 @font-face {
   font-family: 'BYekan';
@@ -16,11 +31,17 @@
   font-style: normal;
 }
 
+html {
+  @include mat.all-component-themes($app-theme);
+}
+
+// Use this semantic variant for destructive Material buttons.
+.app-button-error {
+  @include mat.button-color($app-theme, error);
+}
+
 @theme {
   --font-yekan: 'BYekan', sans-serif;
-
-
-
 
   --background-image-login-button: linear-gradient(
     105deg,
@@ -38,15 +59,16 @@
 
 @layer components {
   .mat-icon.brand-icon {
-    @apply !size-auto !text-8xl !leading-none;
+    width: auto !important;
+    height: auto !important;
+    font-size: 6rem !important;
+    line-height: 1 !important;
   }
-
 }
 
 html {
   font-family: BYekan, Arial, sans-serif;
   background: var(--color-slate-100);
-
 }
 
 body {

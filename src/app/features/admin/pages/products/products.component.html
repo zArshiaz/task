@@ -1,0 +1,35 @@
+<section aria-labelledby="products-title">
+  <app-page-header
+    title="محصولات"
+    description="محصولات فروشگاه را مشاهده، ویرایش یا حذف کنید."
+    titleId="products-title">
+    <button
+      page-header-actions
+      mat-flat-button
+      type="button"
+      (click)="openCreateForm()"
+    >
+      <span class="inline-flex items-center gap-2">
+        <mat-icon aria-hidden="true">add</mat-icon>
+        افزودن محصول
+      </span>
+    </button>
+  </app-page-header>
+
+  @if (errorMessage(); as message) {
+    <div class="mt-5 flex flex-wrap items-center gap-3">
+      <app-alert class="min-w-64 flex-1" variant="error" [message]="message" />
+      <button mat-stroked-button type="button" (click)="loadProducts()">تلاش دوباره</button>
+    </div>
+  }
+
+  <div class="mt-5">
+    <app-products-table
+      [products]="products()"
+      [loading]="isLoading()"
+      [deletingProductId]="deletingProductId()"
+      (editRequested)="openEditForm($event)"
+      (deleteRequested)="confirmDelete($event)"
+    />
+  </div>
+</section>

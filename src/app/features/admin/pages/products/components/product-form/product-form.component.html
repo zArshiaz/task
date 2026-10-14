@@ -1,0 +1,66 @@
+<h2 mat-dialog-title class="text-xl font-bold text-slate-900">
+  {{ isEditMode ? 'ویرایش محصول' : 'افزودن محصول' }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-dialog-content class="!grid !max-h-[65dvh] !gap-3 !overflow-y-auto !py-2 sm:!grid-cols-2">
+    @if (errorMessage(); as message) {
+      <app-alert class="sm:col-span-2" variant="error" [message]="message" />
+    }
+
+    <mat-form-field appearance="outline" class="w-full sm:col-span-2">
+      <mat-label>نام محصول</mat-label>
+      <mat-icon matPrefix aria-hidden="true">inventory_2</mat-icon>
+      <input matInput formControlName="title" autocomplete="off" />
+      @if (form.controls.title.hasError('required')) {
+        <mat-error>نام محصول الزامی است.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>قیمت</mat-label>
+      <mat-icon matPrefix aria-hidden="true">payments</mat-icon>
+      <input matInput type="number" min="0" formControlName="price" />
+      @if (form.controls.price.invalid) {
+        <mat-error>قیمت معتبر وارد کنید.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>دسته‌بندی</mat-label>
+      <mat-icon matPrefix aria-hidden="true">category</mat-icon>
+      <input matInput formControlName="category" autocomplete="off" />
+      @if (form.controls.category.hasError('required')) {
+        <mat-error>دسته‌بندی الزامی است.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full sm:col-span-2">
+      <mat-label>نشانی تصویر</mat-label>
+      <mat-icon matPrefix aria-hidden="true">image</mat-icon>
+      <input matInput type="url" formControlName="image" autocomplete="url" dir="ltr" />
+      @if (form.controls.image.invalid) {
+        <mat-error>نشانی معتبر تصویر وارد کنید.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full sm:col-span-2">
+      <mat-label>توضیحات</mat-label>
+      <textarea matInput rows="4" formControlName="description"></textarea>
+      @if (form.controls.description.hasError('required')) {
+        <mat-error>توضیحات محصول الزامی است.</mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="!gap-2 !px-6 !pb-5">
+    <button mat-button type="button" [disabled]="isSubmitting()" (click)="dialogRef.close()">انصراف</button>
+    <button mat-flat-button type="submit" [disabled]="isSubmitting()">
+      @if (isSubmitting()) {
+        در حال ذخیره...
+      } @else {
+        {{ isEditMode ? 'ذخیره تغییرات' : 'افزودن محصول' }}
+      }
+    </button>
+  </mat-dialog-actions>
+</form>
