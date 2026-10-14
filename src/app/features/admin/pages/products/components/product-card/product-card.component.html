@@ -1,0 +1,55 @@
+<article class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+  <div class="flex items-start gap-3">
+    <img
+      [src]="product().image"
+      [alt]="product().title"
+      class="size-16 shrink-0 rounded-lg border border-slate-100 object-contain p-1"
+    />
+    <div class="min-w-0 flex-1">
+      <h3 class="line-clamp-2 font-medium text-slate-900">{{ product().title }}</h3>
+      <div class="mt-2 flex flex-wrap items-center gap-2">
+        <span class="rounded-full bg-sky-50 px-2.5 py-1 text-xs font-medium text-sky-800">
+          {{ product().category }}
+        </span>
+        <span class="text-sm font-medium text-slate-800">
+          {{ product().price.toLocaleString('en-US') }} دلار
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 flex items-center justify-between border-t border-slate-100 pt-3">
+    <span class="text-xs text-slate-500">شناسه: {{ product().id }}</span>
+    <div class="flex items-center gap-1">
+      <button
+        mat-icon-button
+        type="button"
+        class="!text-slate-600"
+        aria-label="نمایش جزئیات محصول"
+        (click)="detailsRequested.emit(product())"
+      >
+        <mat-icon aria-hidden="true">more_horiz</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        type="button"
+        class="!text-cyan-700"
+        aria-label="ویرایش محصول"
+        (click)="editRequested.emit(product())"
+      >
+        <mat-icon aria-hidden="true">edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        type="button"
+        class="!text-rose-600"
+        aria-label="حذف محصول"
+        [appLoadingButton]="deleting()"
+        [appLoadingButtonShowContent]="false"
+        (click)="deleteRequested.emit(product())"
+      >
+        <mat-icon aria-hidden="true">delete_outline</mat-icon>
+      </button>
+    </div>
+  </div>
+</article>

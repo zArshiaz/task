@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { finalize } from 'rxjs';
 
 import { AlertComponent } from '../../../../../../shared/components/alert/alert.component';
+import { LoadingButtonDirective } from '../../../../../../shared/directives/loading-button/loading-button.directive';
 import { Product, ProductPayload } from '../../models/product.model';
 import { ProductsService } from '../../data-access/products.service';
 
@@ -22,6 +23,7 @@ import { ProductsService } from '../../data-access/products.service';
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
+    LoadingButtonDirective,
   ],
   templateUrl: './product-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,45 @@
+<h2 mat-dialog-title class="text-xl font-bold text-slate-900">جزئیات محصول</h2>
+
+<mat-dialog-content class="!px-6 !pb-2">
+  <div class="grid gap-5 sm:grid-cols-[9rem_minmax(0,1fr)]">
+    <img
+      [src]="product.image"
+      [alt]="product.title"
+      class="mx-auto size-36 rounded-xl border border-slate-100 bg-slate-50 object-contain p-3 sm:mx-0"
+    />
+
+    <dl class="grid gap-3 text-sm">
+      <div>
+        <dt class="text-slate-500">نام محصول</dt>
+        <dd class="mt-1 font-medium text-slate-900">{{ product.title }}</dd>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <dt class="text-slate-500">شناسه</dt>
+          <dd class="mt-1 font-medium text-slate-900">{{ product.id }}</dd>
+        </div>
+        <div>
+          <dt class="text-slate-500">قیمت</dt>
+          <dd class="mt-1 font-medium text-slate-900">
+            {{ product.price.toLocaleString('fa-IR') }} دلار
+          </dd>
+        </div>
+      </div>
+      <div>
+        <dt class="text-slate-500">دسته‌بندی</dt>
+        <dd class="mt-1 font-medium text-slate-900">{{ product.category }}</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="mt-5 border-t border-slate-100 pt-4">
+    <h3 class="text-sm font-medium text-slate-700">توضیحات</h3>
+    <p class="mt-2 whitespace-pre-line text-sm leading-6 text-slate-600">
+      {{ product.description }}
+    </p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="!px-6 !pb-5">
+  <button mat-flat-button type="button" (click)="dialogRef.close()">بستن</button>
+</mat-dialog-actions>

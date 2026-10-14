@@ -54,13 +54,13 @@
   </mat-dialog-content>
 
   <mat-dialog-actions align="end" class="!gap-2 !px-6 !pb-5">
-    <button mat-button type="button" [disabled]="isSubmitting()" (click)="dialogRef.close()">انصراف</button>
-    <button mat-flat-button type="submit" [disabled]="isSubmitting()">
-      @if (isSubmitting()) {
-        در حال ذخیره...
-      } @else {
+    <button mat-button type="button" [disabled]="isSubmitting()" (click)="dialogRef.close()">
+      انصراف
+    </button>
+    <button mat-flat-button type="submit" [appLoadingButton]="isSubmitting()" appLoadingButtonShowContent="false">
+
         {{ isEditMode ? 'ذخیره تغییرات' : 'افزودن محصول' }}
-      }
+
     </button>
   </mat-dialog-actions>
 </form>

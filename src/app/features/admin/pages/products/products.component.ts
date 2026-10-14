@@ -10,6 +10,7 @@ import { filter, finalize, switchMap } from 'rxjs';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 import { DeleteProductDialogComponent } from './components/delete-product-dialog/delete-product-dialog.component';
+import { ProductDetailsDialogComponent } from './components/product-details-dialog/product-details-dialog.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductsTableComponent } from './components/products-table/products-table.component';
 import { ProductsService } from './data-access/products.service';
@@ -50,6 +51,14 @@ export class ProductsComponent {
 
   protected openEditForm(product: Product): void {
     this.openProductForm(product);
+  }
+
+  protected openProductDetails(product: Product): void {
+    this.dialog.open(ProductDetailsDialogComponent, {
+      data: product,
+      width: '36rem',
+      maxWidth: 'calc(100vw - 2rem)',
+    });
   }
 
   protected confirmDelete(product: Product): void {

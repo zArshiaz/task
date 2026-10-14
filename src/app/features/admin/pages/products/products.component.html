@@ -4,7 +4,7 @@
     description="محصولات فروشگاه را مشاهده، ویرایش یا حذف کنید."
     titleId="products-title"
   >
-    <button page-header-actions mat-flat-button type="button" (click)="openCreateForm()">
+    <button page-header-actions mat-flat-button class="transition-transform hover:scale-105 duration-200 ease-in-out active:scale-90" type="button" (click)="openCreateForm()">
       افزودن محصول
     </button>
   </app-page-header>
@@ -24,14 +24,13 @@
     >
       <mat-spinner diameter="40" />
     </div>
-  } @else if (!errorMessage() && products().length === 0) {
-    <app-alert class="mt-5 block" variant="info" message="محصولی برای نمایش وجود ندارد." />
   } @else if (!errorMessage()) {
     <div class="mt-5">
       <app-products-table
         [products]="products()"
         [deletingProductId]="deletingProductId()"
         (editRequested)="openEditForm($event)"
+        (detailsRequested)="openProductDetails($event)"
         (deleteRequested)="confirmDelete($event)"
       />
     </div>
