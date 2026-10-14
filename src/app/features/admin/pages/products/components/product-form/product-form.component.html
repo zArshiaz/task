@@ -12,44 +12,34 @@
       <mat-label>نام محصول</mat-label>
       <mat-icon matPrefix aria-hidden="true">inventory_2</mat-icon>
       <input matInput formControlName="title" autocomplete="off" />
-      @if (form.controls.title.hasError('required')) {
-        <mat-error>نام محصول الزامی است.</mat-error>
-      }
+      <mat-error appFormControlError [control]="form.controls.title" />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>قیمت</mat-label>
       <mat-icon matPrefix aria-hidden="true">payments</mat-icon>
       <input matInput type="number" min="0" formControlName="price" />
-      @if (form.controls.price.invalid) {
-        <mat-error>قیمت معتبر وارد کنید.</mat-error>
-      }
+      <mat-error appFormControlError [control]="form.controls.price" />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>دسته‌بندی</mat-label>
       <mat-icon matPrefix aria-hidden="true">category</mat-icon>
       <input matInput formControlName="category" autocomplete="off" />
-      @if (form.controls.category.hasError('required')) {
-        <mat-error>دسته‌بندی الزامی است.</mat-error>
-      }
+      <mat-error appFormControlError [control]="form.controls.category" />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="w-full sm:col-span-2">
       <mat-label>نشانی تصویر</mat-label>
       <mat-icon matPrefix aria-hidden="true">image</mat-icon>
       <input matInput type="url" formControlName="image" autocomplete="url" dir="ltr" />
-      @if (form.controls.image.invalid) {
-        <mat-error>نشانی معتبر تصویر وارد کنید.</mat-error>
-      }
+      <mat-error appFormControlError [control]="form.controls.image" />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="w-full sm:col-span-2">
       <mat-label>توضیحات</mat-label>
       <textarea matInput rows="4" formControlName="description"></textarea>
-      @if (form.controls.description.hasError('required')) {
-        <mat-error>توضیحات محصول الزامی است.</mat-error>
-      }
+      <mat-error appFormControlError [control]="form.controls.description" />
     </mat-form-field>
   </mat-dialog-content>
 

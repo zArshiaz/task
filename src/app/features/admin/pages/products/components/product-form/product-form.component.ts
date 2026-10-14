@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { finalize } from 'rxjs';
 
 import { AlertComponent } from '../../../../../../shared/components/alert/alert.component';
+import { FormControlErrorComponent } from '../../../../../../shared/components/form-control-error/form-control-error.component';
 import { LoadingButtonDirective } from '../../../../../../shared/directives/loading-button/loading-button.directive';
 import { Product, ProductPayload } from '../../models/product.model';
 import { ProductsService } from '../../data-access/products.service';
@@ -17,6 +18,7 @@ import { ProductsService } from '../../data-access/products.service';
   selector: 'app-product-form',
   imports: [
     AlertComponent,
+    FormControlErrorComponent,
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
